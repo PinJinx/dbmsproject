@@ -1,0 +1,158 @@
+notes on frontend project
+
+
+Absolutely — let’s get your **frontend** dev setup running cleanly on Linux 🧑‍💻
+
+You’re handling only the **frontend**, so we’ll just set up **React + Vite + Tailwind CSS** (super fast to build and style).
+
+---
+
+## ⚙️ Step 1: Make sure your system is ready
+
+Open a terminal and check:
+
+```bash
+node -v
+npm -v
+```
+
+If you *don’t* see versions (like `v18.x.x` for Node), install Node.js:
+
+### Install Node.js (recommended way)
+
+```bash
+sudo apt update
+sudo apt install -y nodejs npm
+```
+
+Then verify again:
+
+```bash
+node -v
+npm -v
+```
+
+✅ You’re good if both commands print version numbers.
+
+---
+
+## 🚀 Step 2: Create your React + Vite app
+
+We’ll use **Vite** because it’s much faster than Create React App.
+
+```bash
+npm create vite@latest student-exam-frontend --template react
+```
+
+It’ll ask for:
+
+* Project name → `student-exam-frontend`
+* Framework → `React`
+* Variant → `JavaScript`
+
+Then go inside your new folder:
+
+```bash
+cd student-exam-frontend
+npm install
+npm run dev
+```
+
+Now open your browser and go to the address it shows (usually `http://localhost:5173`).
+
+🎉 You’ve got a working React app!
+
+---
+
+## 🎨 Step 3: Add Tailwind CSS for styling
+
+In the project folder, install Tailwind:
+
+```bash
+npm install -D tailwindcss
+npx tailwindcss init -p
+```
+
+Then open `tailwind.config.js` and update it like this:
+
+```js
+content: [
+  "./index.html",
+  "./src/**/*.{js,ts,jsx,tsx}",
+],
+```
+
+Next, open `src/index.css` and replace everything with:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+Now your app can use Tailwind classes anywhere 🎨
+Try replacing the contents of `src/App.jsx` with:
+
+```jsx
+export default function App() {
+  return (
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <div className="bg-white p-8 rounded-2xl shadow-lg text-center">
+        <h1 className="text-3xl font-bold mb-4 text-blue-600">
+          Student Exam Portal
+        </h1>
+        <p className="text-gray-600">Frontend setup complete ✅</p>
+      </div>
+    </div>
+  );
+}
+```
+
+Then restart:
+
+```bash
+npm run dev
+```
+
+Your styled page should pop up. 👏
+
+---
+
+## 🔌 Step 4: Get ready for backend connection (later)
+
+Once your backend teammate gives you an API (something like `http://localhost:5000/api/exams`), you’ll be able to fetch data like:
+
+```js
+useEffect(() => {
+  fetch("http://localhost:5000/api/exams")
+    .then((res) => res.json())
+    .then((data) => setExams(data))
+}, []);
+```
+
+For now, you can just use **mock data** (JSON) while they finish their part.
+
+---
+
+## 🗂️ Step 5: (Optional) Recommended project structure
+
+```
+student-exam-frontend/
+├── src/
+│   ├── components/
+│   │   ├── Navbar.jsx
+│   │   └── ExamCard.jsx
+│   ├── pages/
+│   │   ├── Login.jsx
+│   │   ├── Dashboard.jsx
+│   │   └── ExamPage.jsx
+│   ├── App.jsx
+│   └── index.css
+└── package.json
+```
+
+---
+
+If you want, I can write you a **starter template** (React + Tailwind + router) with placeholder pages for Login, Dashboard, and Exam — so you can drop it in and tweak it for your project.
+Wanna do that next?
+
