@@ -1,19 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
+    <title>Enroll Course</title>
     <link rel="stylesheet" href="../css/style.css">
     <script src="../js/api.js"></script>
     <script src="../js/student.js"></script>
 </head>
 <body>
+<div class="nav">Student - Enroll Course</div>
 
 <div class="container">
     <h2>Enroll in Course</h2>
 
-    <input id="cid" placeholder="Course ID">
+    <label>Department</label>
+    <select id="deptSelect" onchange="loadCoursesByDept()"></select>
+
+    <label>Course</label>
+    <select id="courseSelect"></select>
 
     <button onclick="enrollCourse()">Enroll</button>
+    <a class="btn" href="student_home.html">Back</a>
 </div>
+
+<script>
+    loadDepartments(); // auto-load departments dropdown
+</script>
 
 </body>
 </html>

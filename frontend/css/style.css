@@ -13,6 +13,87 @@ body {
     box-shadow: 0px 0px 10px #ccc;
 }
 
+.container {
+    width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ccc;
+}
+
+h2 {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.list-item {
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin: 8px 0;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.list-item:hover {
+    background: #f3f3f3;
+}
+
+.list-item.selected {
+    background: #d0ebff;
+    border-color: #74c0fc;
+}
+
+label {
+    font-weight: bold;
+}
+
+button {
+    width: 100%;
+    margin-top: 12px;
+    padding: 10px;
+    font-size: 16px;
+    background: #228be6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1c7ed6;
+}
+
+#errorBox {
+    display: none;
+    color: red;
+    background: #ffd6d6;
+    border-left: 5px solid red;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+#successBox {
+    display: none;
+    color: green;
+    background: #d3f9d8;
+    border-left: 5px solid green;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+
+.error-message {
+    padding: 8px;
+    background: #ffd6d6;
+    border-left: 4px solid red;
+    color: #a30000;
+    border-radius: 4px;
+}
+
+
 h2 {
     text-align: center;
 }

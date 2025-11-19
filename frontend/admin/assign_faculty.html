@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/api.js"></script>
+    <script src="../js/assign_faculty.js" defer></script>
+</head>
+<body>
+
+<div class="container">
+    <h2>Assign Faculty</h2>
+
+    <div id="errorBox"></div>
+    <div id="successBox"></div>
+
+    <h3>Select a Faculty</h3>
+    <div id="facultyList">Loading...</div>
+
+    <hr>
+
+    <label>Faculty ID</label>
+    <input id="faculty_id" placeholder="Faculty ID">
+
+    <label>Department</label>
+    <select id="dept_id">
+        <option value="">Loading...</option>
+    </select>
+
+
+    <button onclick="assignFaculty()">Assign Faculty</button>
+</div>
+
+</body>
+</html>

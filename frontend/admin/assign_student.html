@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/api.js"></script>
+    <script src="../js/assign_student.js" defer></script>
+</head>
+<body>
+
+<div class="container">
+    <h2>Assign Student</h2>
+
+    <div id="errorBox"></div>
+    <div id="successBox"></div>
+
+    <h3>Select a Student</h3>
+    <div id="studentList">Loading...</div>
+
+    <hr>
+
+    <label>Semester</label>
+    <input id="semester" type="number" placeholder="Semester">
+
+    <label>Roll Number</label>
+    <input id="roll" placeholder="Roll Number">
+
+    <label>CGPA</label>
+    <input id="cgpa" type="number" step="0.01" placeholder="CGPA">
+
+    <button onclick="assignStudent()">Assign Student</button>
+</div>
+
+</body>
+</html>

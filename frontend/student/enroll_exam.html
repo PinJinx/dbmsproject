@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Enroll Exam</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/api.js"></script>
+    <script src="../js/student.js"></script>
+</head>
+<body>
+<div class="nav">Student - Enroll Exam</div>
+
+<div class="container">
+    <h2>Enroll for Exam</h2>
+
+    <label>Department</label>
+    <select id="deptSelect" onchange="loadCoursesByDeptExam()"></select>
+
+    <label>Course</label>
+    <select id="courseSelect" onchange="loadExamsByCourse()"></select>
+
+    <label>Exam</label>
+    <select id="examSelect"></select>
+
+    <button onclick="enrollExam()">Enroll</button>
+    <a class="btn" href="student_home.html">Back</a>
+</div>
+
+<script>
+    loadDepartments(); // auto-load department list
+</script>
+
+</body>
+</html>

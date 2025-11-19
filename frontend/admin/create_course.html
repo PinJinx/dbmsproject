@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/api.js"></script>
+    <script src="../js/admin.js" defer></script>
+</head>
+<body>
+
+<div class="container">
+    <h2>Create Course</h2>
+
+    <div id="errorBox"></div>
+    <div id="successBox"></div>
+
+    <label>Course ID</label>
+    <input id="course_id" placeholder="Enter Course ID">
+
+    <label>Course Name</label>
+    <input id="course_name" placeholder="Enter Course Name">
+
+    <label>Semester</label>
+    <input id="semester" placeholder="Semester">
+
+    <label>Department</label>
+    <select id="dept_id" onchange="loadFacultyForDept()">
+        <option value="">Loading...</option>
+    </select>
+
+    <label>Assign Faculty</label>
+    <select id="faculty_id">
+        <option value="">Loading...</option>
+    </select>
+
+    <button onclick="createCourse()">Create Course</button>
+</div>
+
+</body>
+</html>

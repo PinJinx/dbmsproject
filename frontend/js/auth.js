@@ -1,21 +1,50 @@
 async function loginUser() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
+    const errorBox = document.getElementById("errorBox");
 
     const result = await apiPost("/login", { email, password });
 
     if (result.error) {
-        alert("Invalid login!");
+        if (result.error === "AUTHORISATION_PENDING") {
+            errorBox.style.display = "block";
+            errorBox.innerText = "Your account is pending approval. Please contact the admin.";
+            return;
+        }
+        errorBox.style.display = "block";
+        errorBox.innerText = "Invalid email or password!";
+        return;
+    }
+    errorBox.style.display = "none";
+
+    if (result.role === "admin") {
+        // Admin response: { user_id, role }
+        localStorage.setItem("user_id", result.user_id);
+        localStorage.setItem("role", "admin");
+        location.href = "admin/admin_home.html";
         return;
     }
 
-    localStorage.setItem("user_id", result.user_id);
-    localStorage.setItem("role", result.role);
+    if (result.role === "student") {
+        // Student response: { role: "student", data: [...] }
+        // NATURAL JOIN returns *everything*, user_id is at index 0
+        const student = result.data;
+        localStorage.setItem("user_id", student[0]);
+        localStorage.setItem("role", "student");
+        location.href = "student/student_home.html";
+        return;
+    }
 
-    if (result.role === "admin") location.href = "admin/admin_home.html";
-    if (result.role === "faculty") location.href = "faculty/faculty_home.html";
-    if (result.role === "student") location.href = "student/student_home.html";
+    if (result.role === "faculty") {
+        // Faculty response: { role: "faculty", data: [...] }
+        const faculty = result.data;
+        localStorage.setItem("user_id", faculty[0]);
+        localStorage.setItem("role", "faculty");
+        location.href = "faculty/faculty_home.html";
+        return;
+    }
 }
+
 
 async function registerUser() {
     const role = document.getElementById("role").value;

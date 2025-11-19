@@ -1,23 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="../css/style.css">
-    <script src="../js/api.js"></script>
-    <script src="../js/faculty.js"></script>
+  <meta charset="utf-8" />
+  <title>Create Exam</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/api.js"></script>
+  <script src="../js/faculty.js"></script>
 </head>
 <body>
-
-<div class="container">
+  <div class="nav">Faculty - Create Exam</div>
+  <div class="container">
     <h2>Create Exam</h2>
 
-    <input id="eid" placeholder="Exam ID">
-    <input id="cid" placeholder="Course ID">
-    <input id="name" placeholder="Exam Name">
-    <input id="date" placeholder="Exam Date">
-    <input id="marks" placeholder="Total Marks">
+    <input id="exam_id" placeholder="Exam ID">
+
+    <label>Department</label>
+    <select id="dept_id" onchange="loadCourses()">
+        <option value="">Select Department</option>
+    </select>
+
+    <label>Course</label>
+    <select id="course_id">
+        <option value="">Select a Department First</option>
+    </select>
+
+    <input id="exam_name" placeholder="Exam Name">
+    <input id="exam_date" type="date">
+    <input id="total_marks" type="number" placeholder="Total Marks">
 
     <button onclick="createExam()">Create Exam</button>
+    <a class="btn" href="faculty_home.html">Back</a>
 </div>
-
 </body>
 </html>
