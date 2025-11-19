@@ -8,12 +8,14 @@ from schemas import (
 app = Flask(__name__)
 
 conn = psycopg.connect(
-    dbname="dbmsproject",
+    dbname="dbms",
     user="postgres",
     password="kovoor@73",
     host="localhost",
     port="5432"
 )
+
+
 
 
 @app.route("/register", methods=["POST"])
@@ -89,6 +91,25 @@ def assign_faculty():
             INSERT INTO faculty(faculty_id, user_id, dept_id)
             VALUES (%s, %s, %s)
         """, (data.faculty_id, data.user_id, data.dept_id))
+
+        conn.commit()
+        return jsonify({"success": True})
+
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
+
+@app.route("/admin/student/assign", methods=["POST"])
+def assign_student():
+    try:
+        from schemas import AssignStudent
+        data = AssignStudent(**request.json)
+        cur = conn.cursor()
+
+        cur.execute("""
+            INSERT INTO students(user_id, semester, roll_number, cgpa)
+            VALUES (%s, %s, %s, %s)
+        """, (data.user_id, data.semester, data.roll_number, data.cgpa))
 
         conn.commit()
         return jsonify({"success": True})

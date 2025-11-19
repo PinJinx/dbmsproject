@@ -24,6 +24,14 @@ class AssignFaculty(BaseModel):
     user_id: int
     dept_id: str
 
+class AssignStudent(BaseModel):
+    user_id: int
+    semester: int
+    roll_number: str
+    cgpa: float
+
+
+    
 class CreateCourse(BaseModel):
     course_id: str
     dept_id: str
