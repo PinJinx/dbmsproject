@@ -45,24 +45,78 @@ def login():
     try:
         data = LoginUser(**request.json)
         cur = conn.cursor()
-
         cur.execute("""
             SELECT user_id, role FROM users WHERE email=%s AND password=%s
         """, (data.email, data.password))
 
         user = cur.fetchone()
         if not user:
-            return jsonify({"error": "INVALID_LOGIN"})
+            return jsonify({"error": "INVALID_LOGIN"}), 401
 
-        return jsonify({"user_id": user[0], "role": user[1]})
+        user_id, role = user[0], user[1].lower()
+
+        if role == "student":
+            cur.execute("""
+                SELECT * 
+                FROM users 
+                NATURAL JOIN students 
+                WHERE user_id=%s
+            """, (user_id,))
+
+            student = cur.fetchone()
+            if not student:
+                return jsonify({"error": "AUTHORISATION_PENDING"}), 403
+
+            return jsonify({"role": "student", "data": student})
+        if role == "faculty":
+            cur.execute("""
+                SELECT * 
+                FROM users 
+                NATURAL JOIN faculty 
+                WHERE user_id=%s
+            """, (user_id,))
+
+            faculty = cur.fetchone()
+            if not faculty:
+                return jsonify({"error": "AUTHORISATION_PENDING"}), 403
+
+            return jsonify({"role": "faculty", "data": faculty})
+        return jsonify({"user_id": user_id, "role": "admin"})
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+# -------------------------------------------
+# ADMIN ROUTES
+# -------------------------------------------
+
+@app.route("/admin/faculty/by_dept/<dept_id>", methods=["GET"])
+def get_faculty_by_department(dept_id):
+    try:
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT f.faculty_id, u.user_id, u.name, u.email 
+            FROM faculty f
+            JOIN users u ON f.user_id = u.user_id
+            WHERE f.dept_id = %s
+        """, (dept_id,))
+
+        rows = cur.fetchall()
+
+        return jsonify([
+            {
+                "faculty_id": r[0],
+                "user_id": r[1],
+                "name": r[2],
+                "email": r[3]
+            }
+        for r in rows])
 
     except Exception as e:
         return jsonify({"error": str(e)})
 
 
-# -------------------------------------------
-# ADMIN ROUTES
-# -------------------------------------------
+
 
 @app.route("/admin/dept/create", methods=["POST"])
 def create_department():
@@ -77,6 +131,59 @@ def create_department():
 
         conn.commit()
         return jsonify({"success": True})
+
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
+
+@app.route("/admin/faculty/unassigned", methods=["GET"])
+def get_unassigned_faculty():
+    try:
+        cur = conn.cursor()
+
+        cur.execute("""
+            SELECT user_id, name, email 
+            FROM users
+            WHERE role = 'faculty'
+            AND user_id NOT IN (
+                SELECT user_id FROM faculty
+            )
+        """)
+
+        faculty = cur.fetchall()
+
+        return jsonify([{
+            "user_id": f[0],
+            "name": f[1],
+            "email": f[2]
+        } for f in faculty])
+
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
+
+
+@app.route("/admin/student/unassigned", methods=["GET"])
+def get_unassigned_students():
+    try:
+        cur = conn.cursor()
+
+        cur.execute("""
+            SELECT user_id, name, email
+            FROM users
+            WHERE role = 'student'
+            AND user_id NOT IN (
+                SELECT user_id FROM students
+            )
+        """)
+
+        students = cur.fetchall()
+
+        return jsonify([{
+            "user_id": s[0],
+            "name": s[1],
+            "email": s[2]
+        } for s in students])
 
     except Exception as e:
         return jsonify({"error": str(e)})
@@ -98,6 +205,30 @@ def assign_faculty():
 
     except Exception as e:
         return jsonify({"error": str(e)})
+    
+
+@app.route("/dept/all", methods=["GET"])
+def get_all_departments():
+    try:
+        cur = conn.cursor()
+
+        cur.execute("""
+            SELECT dept_id, dept_name 
+            FROM departments
+            ORDER BY dept_id
+        """)
+
+        departments = cur.fetchall()
+
+        return jsonify([
+            {
+                "dept_id": d[0],
+                "dept_name": d[1]
+            } for d in departments
+        ])
+
+    except Exception as e:
+        return jsonify({"error": str(e)})
 
 
 @app.route("/admin/student/assign", methods=["POST"])
@@ -114,7 +245,6 @@ def assign_student():
 
         conn.commit()
         return jsonify({"success": True})
-
     except Exception as e:
         return jsonify({"error": str(e)})
 
@@ -140,6 +270,75 @@ def create_course():
 # -------------------------------------------
 # FACULTY ROUTES
 # -------------------------------------------
+@app.route("/faculty/courses/by_dept/<dept_id>", methods=["GET"])
+def get_courses_by_dept(dept_id):
+    try:
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT course_id, course_name 
+            FROM courses
+            WHERE dept_id = %s
+            ORDER BY course_id
+        """, (dept_id,))
+
+        rows = cur.fetchall()
+
+        return jsonify([
+            {"course_id": r[0], "course_name": r[1]}
+            for r in rows
+        ])
+
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
+
+@app.route("/faculty/exams/by_course/<course_id>", methods=["GET"])
+def get_exams_by_course(course_id):
+    try:
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT exam_id, exam_name 
+            FROM exams
+            WHERE course_id = %s
+            ORDER BY exam_id
+        """, (course_id,))
+
+        rows = cur.fetchall()
+
+        return jsonify([
+            {"exam_id": r[0], "exam_name": r[1]} for r in rows
+        ])
+
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
+
+@app.route("/faculty/exam/students/<exam_id>", methods=["GET"])
+def get_students_in_exam(exam_id):
+    try:
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT er.student_id, u.name, er.marks_obtained, er.grade
+            FROM exam_results er
+            JOIN users u ON er.student_id = u.user_id
+            WHERE er.exam_id = %s
+        """, (exam_id,))
+
+        rows = cur.fetchall()
+
+        return jsonify([
+            {
+                "student_id": r[0],
+                "name": r[1],
+                "marks": r[2] if r[2] is not None else "",
+                "grade": r[3] if r[3] is not None else ""
+            }
+            for r in rows
+        ])
+
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
 
 @app.route("/faculty/exam/create", methods=["POST"])
 def faculty_create_exam():
@@ -158,17 +357,22 @@ def faculty_create_exam():
     except Exception as e:
         return jsonify({"error": str(e)})
 
-
 @app.route("/faculty/exam/grade", methods=["POST"])
 def grade_student():
     try:
         data = GradeExam(**request.json)
         cur = conn.cursor()
 
+        # Update existing exam result
         cur.execute("""
-            INSERT INTO exam_results(exam_id, student_id, marks_obtained, grade)
-            VALUES (%s, %s, %s, %s)
-        """, (data.exam_id, data.student_id, data.marks, data.grade))
+            UPDATE exam_results
+            SET marks_obtained = %s, grade = %s
+            WHERE exam_id = %s AND student_id = %s
+        """, (data.marks, data.grade, data.exam_id, data.student_id))
+
+        # If no row was updated → the student is not enrolled
+        if cur.rowcount == 0:
+            return jsonify({"error": "STUDENT_NOT_ENROLLED"}), 400
 
         conn.commit()
         return jsonify({"success": True})
@@ -232,4 +436,5 @@ def student_results(user_id):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
+
