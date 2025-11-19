@@ -20,5 +20,5 @@ async function gradeExam() {
     };
 
     const res = await apiPost("/faculty/exam/grade", data);
-    alert(res.success ? "Graded!" : res.error);
+    alert(res.success ? "Grade submitted!" : res.error);
 }

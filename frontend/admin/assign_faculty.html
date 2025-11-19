@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Assign Faculty</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/api.js"></script>
+  <script src="../js/admin.js"></script>
+</head>
+<body>
+  <div class="nav">Admin - Assign Faculty</div>
+  <div class="container">
+    <h2>Assign Faculty</h2>
+    <input id="faculty_id" placeholder="Faculty ID (string)">
+    <input id="user_id" placeholder="User ID (number)" type="number">
+    <input id="dept" placeholder="Department ID">
+    <button onclick="assignFaculty()">Assign</button>
+
+    <h3 style="margin-top:18px;">Assign Student (optional)</h3>
+    <input id="stu_user_id" placeholder="Student user_id" type="number">
+    <input id="semester" placeholder="Semester" type="number">
+    <input id="roll_number" placeholder="Roll Number">
+    <input id="cgpa" placeholder="CGPA" type="number" step="0.01">
+    <button onclick="assignStudent()">Assign Student</button>
+
+    <a class="btn" href="admin_home.html">Back</a>
+  </div>
+</body>
+</html>

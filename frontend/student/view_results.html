@@ -2,17 +2,16 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Enroll Course</title>
+  <title>View Results</title>
   <link rel="stylesheet" href="../css/style.css">
   <script src="../js/api.js"></script>
   <script src="../js/student.js"></script>
 </head>
-<body>
-  <div class="nav">Student - Enroll Course</div>
+<body onload="loadResults()">
+  <div class="nav">Student - Your Results</div>
   <div class="container">
-    <h2>Enroll in Course</h2>
-    <input id="en_course_id" placeholder="Course ID">
-    <button onclick="enrollCourse()">Enroll</button>
+    <h2>Your Results</h2>
+    <div id="results" class="results-list">Loading…</div>
     <a class="btn" href="student_home.html">Back</a>
   </div>
 </body>

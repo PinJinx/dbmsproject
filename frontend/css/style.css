@@ -1,53 +1,330 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f5f7fa;
+/* ---------------------------------------
+   GLOBAL RESET & BASE
+---------------------------------------- */
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
 }
 
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0d0f12;       /* Matte dark background */
+  margin: 0;
+  padding: 0;
+  color: #e6e6e6;
+}
+
+/* ---------------------------------------
+   TOP NAV BAR
+---------------------------------------- */
+.nav {
+  background: #4c5df3;
+  color: #fff;
+  padding: 14px 20px;
+  font-weight: bold;
+  font-size: 18px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 16px;
+  transition: 0.2s;
+}
+
+.nav a:hover {
+  opacity: 0.8;
+}
+
+/* ---------------------------------------
+   CARD / CONTAINER
+---------------------------------------- */
 .container {
-    width: 400px;
-    margin: 80px auto;
-    padding: 25px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px #ccc;
+  width: 420px;
+  max-width: 95%;
+  margin: 50px auto;
+  background: #16181d;
+  padding: 28px 24px;
+  border-radius: 12px;
+  border: 1px solid #2c2f36;
+  box-shadow: 0 0 12px rgba(0,0,0,0.5);
+  animation: fadeUp 0.8s ease;
 }
 
 h2 {
-    text-align: center;
+  text-align: center;
+  margin-top: 0;
+  color: #f5f5f5;
+  letter-spacing: 0.5px;
 }
 
-input, select, button {
-    width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+/* ---------------------------------------
+   FORM ELEMENTS
+---------------------------------------- */
+input,
+select,
+button,
+textarea {
+  width: 100%;
+  padding: 12px 14px;
+  margin-top: 12px;
+  border-radius: 8px;
+  border: 1px solid #2a2d33;
+  background: #0f1114;
+  color: #e6e6e6;
+  font-size: 15px;
+  transition: 0.2s ease;
 }
 
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #4c5df3;
+  outline: none;
+  background: #14161b;
+}
+
+/* ---------------------------------------
+   BUTTONS
+---------------------------------------- */
 button {
-    background: #4c5df3;
-    color: white;
-    border: none;
-    cursor: pointer;
+  background: #4c5df3;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 0.3px;
+  transition: 0.2s ease;
 }
 
 button:hover {
-    opacity: 0.9;
+  background: #3848d6;
 }
 
-.nav {
-    background: #4c5df3;
-    padding: 12px;
-    color: white;
+a.btn {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #4c5df3;
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 0.3px;
+  transition: 0.2s ease;
 }
 
-a {
-    color: #4c5df3;
-    text-decoration: none;
+a.btn:hover {
+  background: #3848d6;
 }
 
-.link {
-    text-align: center;
-    margin-top: 10px;
+/* ---------------------------------------
+   SMALL LINK
+---------------------------------------- */
+.small-link {
+  text-align: center;
+  margin-top: 12px;
+  color: #9a9a9a;
+}
+
+.small-link a {
+  color: #4c5df3;
+  text-decoration: none;
+}
+
+.small-link a:hover {
+  text-decoration: underline;
+}
+
+/* ---------------------------------------
+   RESULTS LIST
+---------------------------------------- */
+.results-list p {
+  margin: 8px 0;
+  padding: 10px;
+  background: #14161b;
+  border-radius: 6px;
+  border: 1px solid #2a2d33;
+}
+
+/* ---------------------------------------
+   FLEX ROWS
+---------------------------------------- */
+.row {
+  display: flex;
+  gap: 12px;
+}
+.row > * { flex: 1; }
+
+/* ============================================================
+   WELCOME PAGE STYLES
+============================================================ */
+
+/* HERO SECTION */
+.hero {
+  text-align: center;
+  padding: 140px 20px;
+}
+
+.hero-title {
+  font-size: 64px;
+  font-weight: bold;
+  background: linear-gradient(90deg, #4c5df3, #9a4dff);
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: float 4s ease-in-out infinite;
+}
+
+.hero-sub {
+  margin-top: 15px;
+  font-size: 20px;
+  color: #bdbdbd;
+  animation: fadeIn 1.5s ease;
+}
+
+/* CTA BUTTONS */
+.cta-buttons {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.cta-buttons a {
+  padding: 12px 26px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  background: #4c5df3;
+  color: white;
+  transition: 0.2s;
+}
+
+.cta-buttons a:hover {
+  background: #3848d6;
+}
+
+/* ABOUT SECTION */
+#about {
+  margin-top: 150px;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.offers {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.offer-box {
+  width: 260px;
+  background: #16181d;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #2a2d33;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  transition: 0.3s ease;
+}
+
+.offer-box:hover {
+  transform: translateY(-6px);
+}
+
+/* ============================================================
+   LOGIN PAGE EXTRA EFFECTS
+============================================================ */
+
+.container.glass {
+  background: rgba(22,24,29,0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* ------------------------------------------------------------
+   ANIMATIONS
+------------------------------------------------------------ */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Smooth animated dark gradient */
+.admin-body {
+  background: linear-gradient(-45deg, #0f0f0f, #151515, #111, #1a1a1a);
+  background-size: 400% 400%;
+  animation: adminBg 14s ease infinite;
+}
+@keyframes adminBg {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Centering wrapper */
+.admin-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 120px;
+}
+
+/* Glassy admin block */
+.admin-card {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 45px 60px;
+  border-radius: 22px;
+  box-shadow: 0 0 35px rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  width: 380px;
+  transition: transform 0.35s ease;
+}
+
+.admin-card:hover {
+  transform: scale(1.015);
+}
+
+/* Enhanced buttons */
+.admin-btn {
+  text-align: center;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.admin-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(76, 93, 243, 0.5);
+}
+
+.logout:hover {
+  box-shadow: 0 10px 25px rgba(255, 60, 60, 0.55);
 }

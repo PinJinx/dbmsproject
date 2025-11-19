@@ -1,22 +1,134 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/api.js"></script>
-    <script src="js/auth.js"></script>
+<meta charset="UTF-8">
+<title>Baums — Login</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+
+<style>
+/* Page background */
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:#0d0f12;
+    color:#e6e6e6;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+/* Floating circles same as welcome page */
+.circle{
+    position:absolute;
+    border-radius:50%;
+    background:#4c5df31a;
+    animation: float 6s infinite ease-in-out alternate;
+}
+.c1{ width:180px; height:180px; top:10%; left:5%; animation-delay:0s; }
+.c2{ width:260px; height:260px; bottom:10%; right:8%; animation-delay:1.8s; }
+.c3{ width:120px; height:120px; top:70%; left:30%; animation-delay:3s; }
+
+@keyframes float{
+    0%{ transform:translateY(0px); }
+    100%{ transform:translateY(-40px); }
+}
+
+/* Login card */
+.login-box{
+    width:380px;
+    padding:35px;
+    background:#15171c;
+    border-radius:14px;
+    border:1px solid #2c2f36;
+    box-shadow:0 0 20px rgba(0,0,0,0.35);
+    animation:fadeIn 0.8s ease forwards;
+    position:relative;
+    z-index:2;
+}
+
+@keyframes fadeIn{
+    0%{ opacity:0; transform:translateY(15px); }
+    100%{ opacity:1; transform:translateY(0); }
+}
+
+.login-box h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#4c5df3;
+}
+
+.login-box input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border-radius:8px;
+    border:1px solid #32353d;
+    background:#0f1014;
+    color:#fff;
+    font-size:14px;
+    transition:0.2s;
+}
+
+.login-box input:focus{
+    border-color:#4c5df3;
+    outline:none;
+}
+
+.login-box button{
+    width:100%;
+    padding:12px;
+    margin-top:12px;
+    background:#4c5df3;
+    border:none;
+    border-radius:8px;
+    color:#fff;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.login-box button:hover{
+    background:#3848d6;
+}
+
+/* Small link */
+.small-link{
+    text-align:center;
+    margin-top:15px;
+}
+.small-link a{
+    color:#4c5df3;
+    text-decoration:none;
+}
+.small-link a:hover{
+    text-decoration:underline;
+}
+</style>
+
 </head>
 <body>
 
-<div class="container">
+<!-- Floating background accents -->
+<div class="circle c1"></div>
+<div class="circle c2"></div>
+<div class="circle c3"></div>
+
+<!-- Login card -->
+<div class="login-box">
     <h2>Login</h2>
 
-    <input id="email" placeholder="Email">
-    <input id="password" type="password" placeholder="Password">
+    <input id="email" type="email" placeholder="Email" required>
+    <input id="password" type="password" placeholder="Password" required>
 
     <button onclick="loginUser()">Login</button>
 
-    <div class="link">
-        <a href="register.html">Create an account</a>
+    <div class="small-link">
+        <a href="register.html">Create account</a>
     </div>
 </div>
 
