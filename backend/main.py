@@ -4,6 +4,7 @@ from schemas import (
     RegisterUser, LoginUser, CreateDepartment,
     AssignFaculty, CreateCourse, CreateExam, GradeExam
 )
+from flask_cors import CORS
 
 app = Flask(__name__)
 
@@ -16,7 +17,7 @@ conn = psycopg.connect(
 )
 
 
-
+CORS(app)
 
 @app.route("/register", methods=["POST"])
 def register():
