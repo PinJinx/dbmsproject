@@ -1,0 +1,53 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f7fa;
+}
+
+.container {
+    width: 400px;
+    margin: 80px auto;
+    padding: 25px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #ccc;
+}
+
+h2 {
+    text-align: center;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background: #4c5df3;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.nav {
+    background: #4c5df3;
+    padding: 12px;
+    color: white;
+}
+
+a {
+    color: #4c5df3;
+    text-decoration: none;
+}
+
+.link {
+    text-align: center;
+    margin-top: 10px;
+}
