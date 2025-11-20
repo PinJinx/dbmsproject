@@ -71,14 +71,5 @@ async function registerUser() {
 
     alert("Registration successful!");
 
-    // Redirect based on role
-    if (role === "admin") {
-        location.href = "admin/admin_home.html";
-    } 
-    else if (role === "faculty") {
-        location.href = "faculty/faculty_home.html";
-    } 
-    else if (role === "student") {
-        location.href = "student/student_home.html";
-    }
+    location.href = "login.html";
 }

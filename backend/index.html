@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exam System Frontend</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 30px;
+        }
+        .block {
+            border: 1px solid #888;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 6px;
+        }
+        input, button {
+            padding: 8px;
+            margin: 5px 0;
+            width: 260px;
+        }
+        button {
+            cursor: pointer;
+        }
+        .title {
+            font-size: 20px;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        pre {
+            background: #eee;
+            padding: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Simple Exam Website Frontend</h1>
+
+<div id="output"></div>
+
+
+<!-- REGISTER -->
+<div class="block">
+    <div class="title">Register</div>
+    <input id="reg_name" placeholder="Name"><br>
+    <input id="reg_email" placeholder="Email"><br>
+    <input id="reg_pass" placeholder="Password"><br>
+    <input id="reg_role" placeholder="Role (admin/faculty/student)"><br>
+    <input id="reg_dob" placeholder="DOB (YYYY-MM-DD)"><br>
+    <input id="reg_address" placeholder="Address"><br>
+
+    <button onclick="sendRegister()">Register</button>
+</div>
+
+
+<!-- LOGIN -->
+<div class="block">
+    <div class="title">Login</div>
+    <input id="log_email" placeholder="Email"><br>
+    <input id="log_pass" placeholder="Password"><br>
+
+    <button onclick="sendLogin()">Login</button>
+</div>
+
+
+<!-- CREATE DEPARTMENT -->
+<div class="block">
+    <div class="title">Create Department</div>
+    <input id="dept_id" placeholder="Dept ID"><br>
+    <input id="dept_name" placeholder="Dept Name"><br>
+    <input id="dept_code" placeholder="Dept Code"><br>
+    <button onclick="createDepartment()">Create</button>
+</div>
+
+
+<!-- ASSIGN FACULTY -->
+<div class="block">
+    <div class="title">Assign Faculty</div>
+    <input id="fac_faculty_id" placeholder="Faculty ID"><br>
+    <input id="fac_user_id" placeholder="User ID"><br>
+    <input id="fac_dept_id" placeholder="Dept ID"><br>
+
+    <button onclick="assignFaculty()">Assign</button>
+</div>
+
+
+<!-- CREATE COURSE -->
+<div class="block">
+    <div class="title">Create Course</div>
+    <input id="course_id" placeholder="Course ID"><br>
+    <input id="course_dept_id" placeholder="Dept ID"><br>
+    <input id="course_faculty_id" placeholder="Faculty ID"><br>
+    <input id="course_name" placeholder="Course Name"><br>
+    <input id="course_sem" placeholder="Semester"><br>
+
+    <button onclick="createCourse()">Create Course</button>
+</div>
+
+
+<!-- CREATE EXAM -->
+<div class="block">
+    <div class="title">Create Exam (Faculty)</div>
+    <input id="exam_id" placeholder="Exam ID"><br>
+    <input id="exam_course_id" placeholder="Course ID"><br>
+    <input id="exam_name" placeholder="Exam Name"><br>
+    <input id="exam_date" placeholder="YYYY-MM-DD"><br>
+    <input id="exam_total" placeholder="Total Marks"><br>
+
+    <button onclick="createExam()">Create Exam</button>
+</div>
+
+    
+<!-- GRADE EXAM -->
+<div class="block">
+    <div class="title">Grade Student (Faculty)</div>
+    <input id="gr_exam_id" placeholder="Exam ID"><br>
+    <input id="gr_student_id" placeholder="Student ID"><br>
+    <input id="gr_marks" placeholder="Marks"><br>
+    <input id="gr_grade" placeholder="Grade"><br>
+
+    <button onclick="gradeExam()">Grade</button>
+</div>
+
+
+<!-- STUDENT ENROLL EXAM -->
+<div class="block">
+    <div class="title">Enroll in Exam</div>
+    <input id="en_exam_id" placeholder="Exam ID"><br>
+    <input id="en_user_id" placeholder="User ID"><br>
+
+    <button onclick="enrollExam()">Enroll</button>
+</div>
+
+
+<!-- STUDENT ENROLL COURSE -->
+<div class="block">
+    <div class="title">Enroll in Course</div>
+    <input id="en_course_uid" placeholder="User ID"><br>
+    <input id="en_course_cid" placeholder="Course ID"><br>
+
+    <button onclick="enrollCourse()">Enroll</button>
+</div>
+
+
+<!-- STUDENT RESULTS -->
+<div class="block">
+    <div class="title">View Student Results</div>
+    <input id="res_uid" placeholder="User ID"><br>
+
+    <button onclick="viewResults()">View Results</button>
+</div>
+
+
+
+<script>
+const BASE = "http://127.0.0.1:5000";
+
+function show(data) {
+    document.getElementById("output").innerHTML =
+        "<pre>" + JSON.stringify(data, null, 2) + "</pre>";
+}
+
+async function req(url, body = {}) {
+    let res = await fetch(BASE + url, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(body)
+    });
+    return res.json();
+}
+
+// REGISTER
+async function sendRegister() {
+    let data = await req("/register", {
+        name: reg_name.value,
+        email: reg_email.value,
+        password: reg_pass.value,
+        role: reg_role.value,
+        dob: reg_dob.value,
+        address: reg_address.value
+    });
+    show(data);
+}
+
+// LOGIN
+async function sendLogin() {
+    let data = await req("/login", {
+        email: log_email.value,
+        password: log_pass.value
+    });
+    show(data);
+}
+
+// CREATE DEPARTMENT
+async function createDepartment() {
+    let data = await req("/admin/dept/create", {
+        dept_id: dept_id.value,
+        dept_name: dept_name.value,
+        dept_code: dept_code.value
+    });
+    show(data);
+}
+
+// ASSIGN FACULTY
+async function assignFaculty() {
+    let data = await req("/admin/faculty/assign", {
+        faculty_id: fac_faculty_id.value,
+        user_id: fac_user_id.value,
+        dept_id: fac_dept_id.value
+    });
+    show(data);
+}
+
+// CREATE COURSE
+async function createCourse() {
+    let data = await req("/admin/course/create", {
+        course_id: course_id.value,
+        dept_id: course_dept_id.value,
+        faculty_id: course_faculty_id.value,
+        course_name: course_name.value,
+        semester: course_sem.value
+    });
+    show(data);
+}
+
+// CREATE EXAM
+async function createExam() {
+    let data = await req("/faculty/exam/create", {
+        exam_id: exam_id.value,
+        course_id: exam_course_id.value,
+        exam_name: exam_name.value,
+        exam_date: exam_date.value,
+        total_marks: exam_total.value
+    });
+    show(data);
+}
+
+// GRADE
+async function gradeExam() {
+    let data = await req("/faculty/exam/grade", {
+        exam_id: gr_exam_id.value,
+        student_id: gr_student_id.value,
+        marks: gr_marks.value,
+        grade: gr_grade.value
+    });
+    show(data);
+}
+
+// ENROLL EXAM
+async function enrollExam() {
+    let data = await req("/student/exam/enroll", {
+        exam_id: en_exam_id.value,
+        user_id: en_user_id.value
+    });
+    show(data);
+}
+
+// ENROLL COURSE
+async function enrollCourse() {
+    let data = await req("/student/course/enroll", {
+        user_id: en_course_uid.value,
+        course_id: en_course_cid.value
+    });
+    show(data);
+}
+
+// VIEW RESULTS (GET request)
+async function viewResults() {
+    let res = await fetch(BASE + "/student/results/" + res_uid.value);
+    show(await res.json());
+}
+</script>
+
+</body>
+</html>

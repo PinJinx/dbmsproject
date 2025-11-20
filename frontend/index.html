@@ -1,14 +1,264 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>College Landing</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Inter", Arial, sans-serif;
+        background: #fce8c9;
+        scroll-behavior: smooth;
+    }
+
+    /* NAV */
+    .top-nav {
+        position: absolute;
+        top: 20px;
+        right: 40px;
+        display: flex;
+        gap: 25px;
+        font-size: 15px;
+        align-items: center;
+    }
+    .top-nav a {
+        color: #777;
+        text-decoration: none;
+    }
+    .top-nav .sign-btn {
+        padding: 10px 22px;
+        border: none;
+        border-radius: 20px;
+        background: #f5a623;
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    /* HERO */
+    .hero-wrapper {
+        width: 85%;
+        max-width: 1200px;
+        margin: 80px auto 40px;
+        background: #fff;
+        border-radius: 22px;
+        padding: 50px 60px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+        display: flex;
+        gap: 60px;
+        align-items: center;
+    }
+
+    .hero-illustration img {
+        width: 360px;
+        height: auto;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .hero-text h1 {
+        font-size: 50px;
+        color: #f5a623;
+        margin-bottom: 10px;
+        font-weight: 700;
+    }
+
+    .hero-text p {
+        color: #666;
+        line-height: 1.7;
+        margin-bottom: 28px;
+        font-size: 16px;
+    }
+
+    .cta-btns {
+        display: flex;
+        gap: 18px;
+    }
+
+    .cta-btns button {
+        padding: 12px 30px;
+        font-size: 16px;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: 0.2s;
+        font-weight: 600;
+    }
+
+    .learn-more {
+        background: #f5a623;
+        color: #fff;
+        border: none;
+    }
+
+    .sign-in {
+        background: #fff;
+        color: #f5a623;
+        border: 2px solid #f5a623;
+    }
+
+    .cta-btns button:hover {
+        opacity: 0.85;
+    }
+
+    /* FEATURES SECTION */
+    .features {
+        width: 85%;
+        max-width: 1200px;
+        margin: 60px auto;
+        text-align: center;
+    }
+
+    .features h2 {
+        font-size: 36px;
+        color: #d88e22;
+        margin-bottom: 10px;
+    }
+
+    .features p {
+        margin-bottom: 40px;
+        color: #6a6a6a;
+    }
+
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 35px;
+    }
+
+    .feature-card {
+        background: #fff;
+        padding: 30px;
+        border-radius: 18px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        text-align: center;
+    }
+
+    .feature-card h3 {
+        color: #f5a623;
+        margin-bottom: 10px;
+    }
+
+    .feature-card p {
+        color: #777;
+        line-height: 1.6;
+    }
+
+    /* BENEFITS SECTION */
+    .benefits {
+        width: 85%;
+        max-width: 1200px;
+        margin: 80px auto;
+        background: #fff7e8;
+        padding: 50px;
+        border-radius: 22px;
+        text-align: center;
+    }
+
+    .benefits h2 {
+        font-size: 32px;
+        color: #d88e22;
+        margin-bottom: 10px;
+    }
+
+    .benefits p {
+        max-width: 700px;
+        margin: 0 auto 30px;
+        color: #666;
+        font-size: 17px;
+    }
+
+    /* FOOTER */
+    footer {
+        background: #f7d6a6;
+        padding: 25px;
+        text-align: center;
+        color: #5a4a33;
+        font-size: 15px;
+    }
+
+    @media (max-width: 900px) {
+        .hero-wrapper {
+            flex-direction: column;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .hero-illustration img {
+            width: 280px;
+            margin-bottom: 25px;
+        }
+
+        .feature-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+</head>
+
 <body>
 
-<div class="container">
-    <div class="link">
-        <a href="login.html">Login account</a>
-        <a href="register.html">Create an account</a>
+<!-- NAV -->
+
+<!-- HERO -->
+<div class="hero-wrapper">
+    <div class="hero-illustration">
+        <img src="../assets/study.jpg" alt="Illustration">
+    </div>
+
+    <div class="hero-text">
+        <h1>Examination System</h1>
+        <p>
+            For easy access of Exams for all students and their faculties
+        </p>
+
+        <div class="cta-btns">
+            <button class="learn-more" onclick="document.getElementById('features').scrollIntoView()">Learn More</button>
+            <button class="sign-in" onclick="window.location.href='login.html'">Sign In</button>
+        </div>
     </div>
 </div>
 
+<!-- FEATURES SECTION -->
+<div id="features" class="features">
+    <h2>What We Offer</h2>
+    <p>We provide tools, guidance, and opportunities to support students every step of their journey.</p>
+
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h3>Curated Exams</h3>
+            <p>Students can take exams of varying difficulty suited to their current academic level.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Expert Mentorship</h3>
+            <p>Connect with faculty to ask doubts and clarification.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Career Support</h3>
+            <p>Gain access to internships, resume building, and personalized job-search coaching.</p>
+        </div>
+    </div>
+</div>
+
+<!-- BENEFITS -->
+<div class="benefits">
+    <h2>Why Students Choose Us</h2>
+    <p>
+        We blend modern tools with human support to create an empowering environment where students
+        can stay focused, motivated, and financially prepared.
+    </p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    © 2025 College — All Rights Reserved • Privacy • Terms
+</footer>
 
 </body>
+
 </html>

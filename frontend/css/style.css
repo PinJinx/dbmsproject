@@ -1,134 +1,145 @@
+/* ---- GLOBAL (MATCH LANDING PAGE) ---- */
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f5f7fa;
+    font-family: "Inter", Arial, sans-serif;
+    background: #fce8c9; /* warm beige */
+    color: #5a4a33;      /* warm brown text */
 }
 
+/* ---- CONTAINER ---- */
 .container {
     width: 400px;
-    margin: 80px auto;
-    padding: 25px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px #ccc;
+    margin: 50px auto;
+    padding: 26px 28px;
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+    transition: box-shadow 0.2s ease;
 }
 
-.container {
-    width: 400px;
-    margin: 40px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px #ccc;
+.container:hover {
+    box-shadow: 0 10px 26px rgba(0,0,0,0.10);
 }
 
 h2 {
-    margin-bottom: 15px;
+    margin-bottom: 18px;
     text-align: center;
+    font-weight: 700;
+    color: #d88e22; /* warm orange-brown heading */
 }
 
+/* ---- LIST ITEMS ---- */
 .list-item {
-    padding: 10px;
-    border: 1px solid #ddd;
-    margin: 8px 0;
-    border-radius: 6px;
+    padding: 12px 14px;
+    border: 1px solid #f2d7b8; /* soft warm border */
+    margin: 10px 0;
+    border-radius: 10px;
     cursor: pointer;
+    background: #fffdf8; /* subtle warm tint */
+    transition: background 0.2s, border-color 0.2s;
 }
 
 .list-item:hover {
-    background: #f3f3f3;
+    background: #fff3dd; /* warm hover */
+    border-color: #f0c693;
 }
 
 .list-item.selected {
-    background: #d0ebff;
-    border-color: #74c0fc;
+    background: #ffe7c4;
+    border-color: #f5a623; /* orange accent */
 }
 
-label {
-    font-weight: bold;
+/* ---- INPUTS, SELECTS, BUTTONS ---- */
+input,
+select,
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+    border-radius: 10px;
+    border: 1px solid #f0d9bb;
+    font-size: 15px;
+    background: #fffefb;
+    color: #5a4a33;
+}
+
+input:focus,
+select:focus {
+    border-color: #f5a623;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.25);
 }
 
 button {
-    width: 100%;
-    margin-top: 12px;
-    padding: 10px;
-    font-size: 16px;
-    background: #228be6;
+    background: #f5a623; /* strong orange accent */
     color: white;
     border: none;
-    border-radius: 8px;
-    cursor: pointer;
+    font-weight: 600;
+    transition: opacity 0.2s, transform 0.1s;
 }
 
 button:hover {
-    background: #1c7ed6;
+    opacity: 0.92;
+    transform: translateY(-1px);
 }
 
-#errorBox {
-    display: none;
-    color: red;
-    background: #ffd6d6;
-    border-left: 5px solid red;
-    padding: 8px;
-    border-radius: 4px;
-    margin-bottom: 10px;
-}
-
+/* ---- MESSAGES ---- */
+#errorBox,
 #successBox {
     display: none;
-    color: green;
-    background: #d3f9d8;
-    border-left: 5px solid green;
-    padding: 8px;
-    border-radius: 4px;
-    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    border-left: 6px solid;
 }
 
+/* error = warm-toned red */
+#errorBox {
+    color: #8f1c00;
+    background: #ffe4d9;
+    border-color: #ff7b4d;
+}
 
+/* success = warm green */
+#successBox {
+    color: #0d7a20;
+    background: #d9f9e4;
+    border-color: #48c96f;
+}
+
+/* Smaller inline error */
 .error-message {
     padding: 8px;
-    background: #ffd6d6;
-    border-left: 4px solid red;
-    color: #a30000;
-    border-radius: 4px;
-}
-
-
-h2 {
-    text-align: center;
-}
-
-input, select, button {
-    width: 100%;
-    padding: 12px;
-    margin-top: 10px;
+    background: #ffe7dd;
+    border-left: 4px solid #ff7b4d;
+    color: #8f1c00;
     border-radius: 6px;
-    border: 1px solid #ccc;
 }
 
-button {
-    background: #4c5df3;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    opacity: 0.9;
-}
-
+/* ---- NAV ---- */
 .nav {
-    background: #4c5df3;
-    padding: 12px;
+    background: #f5a623;
+    padding: 14px;
     color: white;
+    font-size: 17px;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 0 0 12px 12px;
 }
 
+/* ---- LINKS ---- */
 a {
-    color: #4c5df3;
+    color: #d88e22;
     text-decoration: none;
+    font-weight: 500;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 .link {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 14px;
 }
